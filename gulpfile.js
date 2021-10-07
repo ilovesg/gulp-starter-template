@@ -88,7 +88,7 @@ function scripts() {
 }
 
 function styles() {
-  return src(['src/styles/sass/*.*', '!src/styles/sass/_*.*'])
+  return src(['src/styles/*.*', '!src/styles/_*.*'])
     .pipe(eval('sassglob')())
     .pipe(eval('sass')({ 'include css': true }))
     .pipe(postCss([
@@ -147,7 +147,7 @@ function deploy() {
 }
 
 function startwatch() {
-  watch('src/styles/sass/**/*', { usePolling: true }, styles);
+  watch('src/styles/**/*', { usePolling: true }, styles);
   watch(['src/js/**/*.js', '!src/js/**/*.min.js'], { usePolling: true }, scripts);
   watch('src/pug/**/*.pug', { usePolling: true }, buildhtml);
   watch('src/images/src/**/*', { usePolling: true }, images);
