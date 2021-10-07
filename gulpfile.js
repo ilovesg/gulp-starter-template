@@ -56,6 +56,9 @@ function scripts() {
         rules: [
           {
             test: /\.m?js$/,
+            resolve: {
+              fullySpecified: false,
+            },
             exclude: /(node_modules)/,
             use: {
               loader: 'babel-loader',
