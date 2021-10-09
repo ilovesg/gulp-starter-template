@@ -9,6 +9,8 @@
     "stylelint-scss",
   ],
   rules: {
-    // My rules..
+    "at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["function", "if", "each", "include", "mixin", "use"]
+    }],
   }
 }
