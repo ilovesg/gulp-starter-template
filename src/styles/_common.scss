@@ -9,20 +9,20 @@
 
 input, textarea {
 	outline: none;
-	&:focus:required:invalid {
-		border-color: red;
-	}
 	&:required:valid {
 		border-color: green;
+	}
+	&:focus:required:invalid {
+		border-color: red;
 	}
 }
 
 body {
+	position: relative;
+	min-width: 320px;
+	color: $text-color;
 	font-family: $main-font;
 	font-size: $font-size;
 	line-height: $line-height;
-	color: $text-color;
-	min-width: 320px;
-	position: relative;
 	overflow-x: hidden;
 }
