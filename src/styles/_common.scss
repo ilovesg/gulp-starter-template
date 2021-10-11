@@ -1,0 +1,28 @@
+::placeholder {
+	color: #666;
+}
+
+::selection {
+	background-color: $accent;
+	color: #fff;
+}
+
+input, textarea {
+	outline: none;
+	&:required:valid {
+		border-color: green;
+	}
+	&:focus:required:invalid {
+		border-color: red;
+	}
+}
+
+body {
+	position: relative;
+	min-width: 320px;
+	color: $text-color;
+	font-family: $main-font;
+	font-size: $font-size;
+	line-height: $line-height;
+	overflow-x: hidden;
+}
