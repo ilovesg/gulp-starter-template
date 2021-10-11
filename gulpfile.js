@@ -2,7 +2,6 @@
 /* eslint no-eval: 1 */
 import pkg from 'gulp';
 import browserSync from 'browser-sync';
-import bssi from 'browsersync-ssi';
 // import ssi from 'ssi';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
@@ -35,7 +34,6 @@ function browsersync() {
   browserSync.init({
     server: {
       baseDir: 'src/',
-      middleware: bssi({ baseDir: 'src/', ext: '.html' }),
     },
     ghostMode: { clicks: false },
     notify: false,
