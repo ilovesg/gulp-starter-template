@@ -2,7 +2,6 @@
 /* eslint no-eval: 1 */
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
-// import ssi from 'ssi';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
