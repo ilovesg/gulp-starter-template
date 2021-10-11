@@ -1,16 +1,12 @@
-/* eslint no-unused-vars: 1 */
-/* eslint no-eval: 1 */
-import pkg from 'gulp';
+import gulp from 'gulp';
 import browserSync from 'browser-sync';
-import bssi from 'browsersync-ssi';
-// import ssi from 'ssi';
 import webpackStream from 'webpack-stream';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import gulpSass from 'gulp-sass';
 import dartSass from 'sass';
-import sassglob from 'gulp-sass-glob';
-import postCss from 'gulp-postcss';
+import sassGlob from 'gulp-sass-glob';
+import postcss from 'gulp-postcss';
 import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import imagemin from 'gulp-imagemin';
@@ -21,21 +17,20 @@ import del from 'del';
 import pug from 'gulp-pug';
 
 const {
-  gulp,
   src,
   dest,
   parallel,
   series,
   watch,
-} = pkg;
-const sass = gulpSass(dartSass);
-const fileswatch = 'html,htm,txt,json,md,woff2';
+} = gulp;
 
-function browsersync() {
+const sass = gulpSass(dartSass);
+const filesWatch = 'html,htm,txt,json,md,woff2';
+
+function brsrSnc() {
   browserSync.init({
     server: {
       baseDir: 'src/',
-      middleware: bssi({ baseDir: 'src/', ext: '.html' }),
     },
     ghostMode: { clicks: false },
     notify: false,
@@ -89,9 +84,9 @@ function scripts() {
 
 function styles() {
   return src(['src/styles/*.*', '!src/styles/_*.*'])
-    .pipe(eval('sassglob')())
-    .pipe(eval('sass')({ 'include css': true }))
-    .pipe(postCss([
+    .pipe(sassGlob())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(postcss([
       autoprefixer({ grid: 'autoplace' }),
       cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
     ]))
@@ -108,7 +103,7 @@ function images() {
     .pipe(browserSync.stream());
 }
 
-function buildcopy() {
+function buildCopy() {
   return src([
     '{src/js,src/css}/*.min.*',
     'src/images/**/*.*',
@@ -119,14 +114,14 @@ function buildcopy() {
     .pipe(dest('docs'));
 }
 
-async function buildhtml() {
+async function buildHtml() {
   return src('src/pug/pages/*.pug')
     .pipe(pug({ pretty: true }))
     .pipe(dest('src'))
     .pipe(browserSync.stream());
 }
 
-async function cleandocs() {
+async function cleanDocs() {
   del('docs/**/*', { force: true });
 }
 
@@ -146,12 +141,12 @@ function deploy() {
     }));
 }
 
-function startwatch() {
+function startWatch() {
   watch('src/styles/**/*', { usePolling: true }, styles);
   watch(['src/js/**/*.js', '!src/js/**/*.min.js'], { usePolling: true }, scripts);
-  watch('src/pug/**/*.pug', { usePolling: true }, buildhtml);
+  watch('src/pug/**/*.pug', { usePolling: true }, buildHtml);
   watch('src/images/src/**/*', { usePolling: true }, images);
-  watch(`src/**/*.{${fileswatch}}`, { usePolling: true }).on('change', browserSync.reload);
+  watch(`src/**/*.{${filesWatch}}`, { usePolling: true }).on('change', browserSync.reload);
 }
 
 export {
@@ -161,5 +156,5 @@ export {
   deploy,
 };
 export const assets = series(scripts, styles, images);
-export const build = series(cleandocs, images, scripts, styles, buildcopy, buildhtml);
-export default series(scripts, styles, images, buildhtml, parallel(browsersync, startwatch));
+export const build = series(cleanDocs, images, scripts, styles, buildCopy, buildHtml);
+export default series(scripts, styles, images, buildHtml, parallel(brsrSnc, startWatch));
