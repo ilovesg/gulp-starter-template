@@ -20,13 +20,13 @@ import del from 'del';
 import pug from 'gulp-pug';
 
 const {
-  gulp,
   src,
   dest,
   parallel,
   series,
   watch,
 } = pkg;
+
 const sass = gulpSass(dartSass);
 const fileswatch = 'html,htm,txt,json,md,woff2';
 
