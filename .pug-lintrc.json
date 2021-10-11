@@ -23,6 +23,7 @@
   "disallowStringConcatenation": true,
   "disallowStringInterpolation": null,
   "disallowTagInterpolation": null,
+  "disallowTrailingSpaces": true,
   "maximumNumberOfLines": null,
   "requireClassLiteralsBeforeAttributes": true,
   "requireClassLiteralsBeforeIdLiterals": true,
