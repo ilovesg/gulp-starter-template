@@ -87,8 +87,8 @@ function scripts() {
 
 function styles() {
   return src(['src/styles/*.*', '!src/styles/_*.*'])
-    .pipe(eval('sassGlob')())
-    .pipe(eval('sass')({ 'include css': true }))
+    .pipe(sassGlob())
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
       autoprefixer({ grid: 'autoplace' }),
       cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
