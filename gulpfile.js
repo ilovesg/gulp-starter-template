@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 1 */
 /* eslint no-eval: 1 */
-import pkg from 'gulp';
+import gulp from 'gulp';
 import browserSync from 'browser-sync';
 // import ssi from 'ssi';
 import webpackStream from 'webpack-stream';
@@ -25,7 +25,7 @@ const {
   parallel,
   series,
   watch,
-} = pkg;
+} = gulp;
 
 const sass = gulpSass(dartSass);
 const fileswatch = 'html,htm,txt,json,md,woff2';
