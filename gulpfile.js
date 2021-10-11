@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 1 */
-/* eslint no-eval: 1 */
 import gulp from 'gulp';
 import browserSync from 'browser-sync';
 import webpackStream from 'webpack-stream';
