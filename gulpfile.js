@@ -77,7 +77,6 @@ function scripts() {
     }, webpack)).on('error', function handleError() {
       this.emit('end');
     })
-    .pipe(concat('scripts.min.js'))
     .pipe(dest('src/js'))
     .pipe(browserSync.stream());
 }
