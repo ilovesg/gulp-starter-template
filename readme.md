@@ -39,7 +39,7 @@ Script sources are located in the **/src/scripts** directory. Modules should be 
 
 ### Styles
 
-SASS sources are located in the **src/styles/** folder. Mixins should be placed in the **/src/styles/_mixins** subdirectory and then may be imported inside the desired file. Compiled and compressed styles will be placed in the **/css/styles.min.css** file.
+SASS sources are located in the **/src/styles/** folder. Mixins should be placed in the **/src/styles/_mixins** subdirectory and then may be imported inside the desired file. Compiled and compressed styles will be placed in the **/css/styles.min.css** file.
 
 ### HTML
 
