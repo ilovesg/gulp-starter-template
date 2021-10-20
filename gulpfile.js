@@ -11,7 +11,6 @@ import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import imagemin from 'gulp-imagemin';
 import changed from 'gulp-changed';
-import concat from 'gulp-concat';
 import rsync from 'gulp-rsync';
 import del from 'del';
 import pug from 'gulp-pug';
