@@ -143,7 +143,7 @@ function deploy() {
 
 function startWatch() {
   watch('src/styles/**/*', { usePolling: true }, styles);
-  watch(['src/js/**/*.js', '!src/js/**/*.min.js'], { usePolling: true }, scripts);
+  watch('src/scripts/**/*.js', { usePolling: true }, scripts);
   watch('src/pug/**/*.pug', { usePolling: true }, buildHtml);
   watch('src/images/src/**/*', { usePolling: true }, images);
   watch(`src/**/*.{${filesWatch}}`, { usePolling: true }).on('change', browserSync.reload);
