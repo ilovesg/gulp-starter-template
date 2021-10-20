@@ -89,7 +89,6 @@ function styles() {
       autoprefixer({ grid: 'autoplace' }),
       cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
     ]))
-    .pipe(concat('styles.min.css'))
     .pipe(dest('src/css'))
     .pipe(browserSync.stream());
 }
