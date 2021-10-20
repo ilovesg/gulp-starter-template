@@ -35,7 +35,7 @@ List of file extensions for watching & hard reload.
 
 ### Scripts
 
-Script sources are located in the **/src/js** folder. Modules should be placed in the **/src/js/modules** subdirectory and then imported inside the **common.js** file. Source scripts are also minified and placed in the **scripts.min.js** file.
+Script sources are located in the **/src/scripts** directory. Modules should be placed in the **/src/scripts/modules** subdirectory and then imported inside the **common.js** file. Source scripts are also minified and placed in the **/src/js/scripts.min.js** file.
 
 ### Styles
 
