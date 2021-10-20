@@ -82,7 +82,7 @@ function scripts() {
 }
 
 function styles() {
-  return src(['src/styles/*.*', '!src/styles/_*.*'])
+  return src('src/styles/main.scss')
     .pipe(sassGlob())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
