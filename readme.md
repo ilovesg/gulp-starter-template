@@ -26,8 +26,8 @@ List of file extensions for watching & hard reload.
 
 ### Gulp tasks
 
-* `gulp`: run default Gulp task (includes `scripts`, `images`, `styles`, `brsrSnc`, `startWatch`);
-* `scripts`, `styles`, `images`, `assets`: build related assets;
+* `gulp`: run default Gulp task (includes `buildScripts`, `buildStyles`, `buildImages`, `buildHtml`, `brsrSnc`, `startWatch`);
+* `buildScripts`, `buildStyles`, `buildImages`, `buildHtml`, `buildAssets`: build related assets;
 * `deploy`: deploy project via **rsync**;
 * `build`: build project.
 
