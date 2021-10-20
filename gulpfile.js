@@ -47,6 +47,9 @@ function scripts() {
       // plugins: [
       //   new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }),
       // ],
+      output: {
+        filename: 'scripts.js',
+      },
       module: {
         rules: [
           {
@@ -77,6 +80,9 @@ function scripts() {
     }, webpack)).on('error', function handleError() {
       this.emit('end');
     })
+    .pipe(rename({
+      suffix: '.min',
+    }))
     .pipe(dest('src/js'))
     .pipe(browserSync.stream());
 }
