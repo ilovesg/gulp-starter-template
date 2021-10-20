@@ -40,7 +40,7 @@ function brsrSnc() {
 }
 
 function scripts() {
-  return src(['src/js/**/*.js', '!src/js/*.min.js'])
+  return src('src/scripts/common.js')
     .pipe(webpackStream({
       mode: 'production',
       performance: { hints: false },
