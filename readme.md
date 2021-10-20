@@ -26,8 +26,8 @@ List of file extensions for watching & hard reload.
 
 ### Gulp tasks
 
-* `gulp`: run default Gulp task (includes `scripts`, `images`, `styles`, `brsrSnc`, `startWatch`);
-* `scripts`, `styles`, `images`, `assets`: build related assets;
+* `gulp`: run default Gulp task (includes `buildScripts`, `buildStyles`, `buildImages`, `buildHtml`, `brsrSnc`, `startWatch`);
+* `buildScripts`, `buildStyles`, `buildImages`, `buildHtml`, `buildAssets`: build related assets;
 * `deploy`: deploy project via **rsync**;
 * `build`: build project.
 
@@ -35,11 +35,11 @@ List of file extensions for watching & hard reload.
 
 ### Scripts
 
-Script sources are located in the **/src/js** folder. Modules should be placed in the **/src/js/modules** subdirectory and then imported inside the **common.js** file. Source scripts are also minified and placed in the **scripts.min.js** file.
+Script sources are located in the **/src/scripts** directory. Modules should be placed in the **/src/scripts/modules** subdirectory and then imported inside the **common.js** file. Source scripts are also minified and placed in the **/src/js/scripts.min.js** file.
 
 ### Styles
 
-SASS sources are located in the **src/styles/** folder. Mixins should be placed in the **/src/styles/_mixins** subdirectory and then may be imported inside the desired file. Compiled and compressed styles will be placed in the **/css/styles.min.css** file.
+SASS sources are located in the **/src/styles/** folder. Mixins should be placed in the **/src/styles/_mixins** subdirectory and then may be imported inside the desired file. Compiled and compressed styles will be placed in the **/css/styles.min.css** file.
 
 ### HTML
 

@@ -11,10 +11,10 @@ import cssnano from 'cssnano';
 import autoprefixer from 'autoprefixer';
 import imagemin from 'gulp-imagemin';
 import changed from 'gulp-changed';
-import concat from 'gulp-concat';
 import rsync from 'gulp-rsync';
 import del from 'del';
 import pug from 'gulp-pug';
+import rename from 'gulp-rename';
 
 const {
   src,
@@ -39,14 +39,17 @@ function brsrSnc() {
   });
 }
 
-function scripts() {
-  return src(['src/js/**/*.js', '!src/js/*.min.js'])
+function buildScripts() {
+  return src('src/scripts/common.js')
     .pipe(webpackStream({
       mode: 'production',
       performance: { hints: false },
       // plugins: [
       //   new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }),
       // ],
+      output: {
+        filename: 'scripts.js',
+      },
       module: {
         rules: [
           {
@@ -77,25 +80,30 @@ function scripts() {
     }, webpack)).on('error', function handleError() {
       this.emit('end');
     })
-    .pipe(concat('scripts.min.js'))
+    .pipe(rename({
+      suffix: '.min',
+    }))
     .pipe(dest('src/js'))
     .pipe(browserSync.stream());
 }
 
-function styles() {
-  return src(['src/styles/*.*', '!src/styles/_*.*'])
+function buildStyles() {
+  return src('src/styles/main.scss')
     .pipe(sassGlob())
     .pipe(sass().on('error', sass.logError))
     .pipe(postcss([
       autoprefixer({ grid: 'autoplace' }),
       cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
     ]))
-    .pipe(concat('styles.min.css'))
+    .pipe(rename({
+      basename: 'styles',
+      suffix: '.min',
+    }))
     .pipe(dest('src/css'))
     .pipe(browserSync.stream());
 }
 
-function images() {
+function buildImages() {
   return src(['src/images/src/**/*'])
     .pipe(changed('src/images/docs'))
     .pipe(imagemin())
@@ -142,19 +150,41 @@ function deploy() {
 }
 
 function startWatch() {
-  watch('src/styles/**/*', { usePolling: true }, styles);
-  watch(['src/js/**/*.js', '!src/js/**/*.min.js'], { usePolling: true }, scripts);
+  watch('src/styles/**/*', { usePolling: true }, buildStyles);
+  watch('src/scripts/**/*.js', { usePolling: true }, buildScripts);
   watch('src/pug/**/*.pug', { usePolling: true }, buildHtml);
-  watch('src/images/src/**/*', { usePolling: true }, images);
+  watch('src/images/src/**/*', { usePolling: true }, buildImages);
   watch(`src/**/*.{${filesWatch}}`, { usePolling: true }).on('change', browserSync.reload);
 }
 
 export {
-  scripts,
-  styles,
-  images,
+  buildScripts,
+  buildStyles,
+  buildImages,
+  buildHtml,
   deploy,
 };
-export const assets = series(scripts, styles, images);
-export const build = series(cleanDocs, images, scripts, styles, buildCopy, buildHtml);
-export default series(scripts, styles, images, buildHtml, parallel(brsrSnc, startWatch));
+export const buildAssets = series(
+  buildScripts,
+  buildStyles,
+  buildImages,
+  buildHtml,
+);
+export const build = series(
+  cleanDocs,
+  buildImages,
+  buildScripts,
+  buildStyles,
+  buildCopy,
+  buildHtml,
+);
+export default series(
+  buildScripts,
+  buildStyles,
+  buildImages,
+  buildHtml,
+  parallel(
+    brsrSnc,
+    startWatch,
+  ),
+);
