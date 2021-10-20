@@ -48,3 +48,9 @@ Sources are located in the **/src/pug** folder. Layout templates should be place
 ### Images
 
 All project images are located in the **/src/images** folder. Images from the **/src/images/src** subfolder will be compressed and placed into the **/src/images/docs** subfolder.
+
+## Included features
+
+* [Bootstrap Reboot](https://getbootstrap.com/docs/5.1/content/reboot/) — element-specific CSS changes.
+* [Bootstrap Breakpoints](https://getbootstrap.com/docs/5.1/layout/breakpoints/) — breakpoints mixin (SCSS).
+* [Bootstrap Grid](https://getbootstrap.com/docs/5.1/layout/grid/) (optional) — grid mixin (SCSS).
