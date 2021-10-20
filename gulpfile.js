@@ -167,6 +167,7 @@ export const buildAssets = series(
   buildScripts,
   buildStyles,
   buildImages,
+  buildHtml,
 );
 export const build = series(
   cleanDocs,
