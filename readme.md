@@ -9,3 +9,24 @@ This template helps to solve the following tasks:
 * code analysis with linters;
 * image minification;
 * deployment on a remote server.
+
+## How to use
+
+1. Clone template content into the current folder and remove unnecessary files with the following command: `git clone https://github.com/ilovesg/starter-template .; rm -rf trunk readme.md .git docs` or [download it manually](https://github.com/ilovesg/starter-template/archive/refs/heads/main.zip).
+2. Install dependencies: `npm i`;
+3. Run: `gulp`.
+
+### gulpfile.js options
+
+#### filesWatch
+
+Type: `String`; default: `'html,htm,txt,json,md,woff2'`.
+
+List of file extensions for watching & hard reload.
+
+### Gulp tasks
+
+* `gulp`: run default Gulp task (includes `scripts`, `images`, `styles`, `brsrSnc`, `startWatch`);
+* `scripts`, `styles`, `images`, `assets`: build related assets;
+* `deploy`: deploy project via **rsync**;
+* `build`: build project.
