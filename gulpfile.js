@@ -14,6 +14,7 @@ import changed from 'gulp-changed';
 import rsync from 'gulp-rsync';
 import del from 'del';
 import pug from 'gulp-pug';
+import rename from 'gulp-rename';
 
 const {
   src,
