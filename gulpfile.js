@@ -39,7 +39,7 @@ function brsrSnc() {
   });
 }
 
-function scripts() {
+function buildScripts() {
   return src('src/scripts/common.js')
     .pipe(webpackStream({
       mode: 'production',
@@ -87,7 +87,7 @@ function scripts() {
     .pipe(browserSync.stream());
 }
 
-function styles() {
+function buildStyles() {
   return src('src/styles/main.scss')
     .pipe(sassGlob())
     .pipe(sass().on('error', sass.logError))
@@ -103,7 +103,7 @@ function styles() {
     .pipe(browserSync.stream());
 }
 
-function images() {
+function buildImages() {
   return src(['src/images/src/**/*'])
     .pipe(changed('src/images/docs'))
     .pipe(imagemin())
@@ -150,19 +150,39 @@ function deploy() {
 }
 
 function startWatch() {
-  watch('src/styles/**/*', { usePolling: true }, styles);
-  watch('src/scripts/**/*.js', { usePolling: true }, scripts);
+  watch('src/styles/**/*', { usePolling: true }, buildStyles);
+  watch('src/scripts/**/*.js', { usePolling: true }, buildScripts);
   watch('src/pug/**/*.pug', { usePolling: true }, buildHtml);
-  watch('src/images/src/**/*', { usePolling: true }, images);
+  watch('src/images/src/**/*', { usePolling: true }, buildImages);
   watch(`src/**/*.{${filesWatch}}`, { usePolling: true }).on('change', browserSync.reload);
 }
 
 export {
-  scripts,
-  styles,
-  images,
+  buildScripts,
+  buildStyles,
+  buildImages,
   deploy,
 };
-export const assets = series(scripts, styles, images);
-export const build = series(cleanDocs, images, scripts, styles, buildCopy, buildHtml);
-export default series(scripts, styles, images, buildHtml, parallel(brsrSnc, startWatch));
+export const buildAssets = series(
+  buildScripts,
+  buildStyles,
+  buildImages,
+);
+export const build = series(
+  cleanDocs,
+  buildImages,
+  buildScripts,
+  buildStyles,
+  buildCopy,
+  buildHtml,
+);
+export default series(
+  buildScripts,
+  buildStyles,
+  buildImages,
+  buildHtml,
+  parallel(
+    brsrSnc,
+    startWatch,
+  ),
+);
