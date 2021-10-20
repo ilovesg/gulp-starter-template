@@ -161,6 +161,7 @@ export {
   buildScripts,
   buildStyles,
   buildImages,
+  buildHtml,
   deploy,
 };
 export const buildAssets = series(
