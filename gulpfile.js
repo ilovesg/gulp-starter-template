@@ -95,6 +95,10 @@ function styles() {
       autoprefixer({ grid: 'autoplace' }),
       cssnano({ preset: ['default', { discardComments: { removeAll: true } }] }),
     ]))
+    .pipe(rename({
+      basename: 'styles',
+      suffix: '.min',
+    }))
     .pipe(dest('src/css'))
     .pipe(browserSync.stream());
 }
