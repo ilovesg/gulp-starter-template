@@ -175,8 +175,8 @@ export const build = series(
   buildImages,
   buildScripts,
   buildStyles,
-  buildCopy,
   buildHtml,
+  buildCopy,
 );
 export default series(
   buildScripts,
